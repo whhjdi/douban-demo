@@ -1,3 +1,47 @@
-.form-control{
-    width:800px;
+
+.site-content{
+    margin-top:70px;
+    padding: 10px;
 }
+@media (max-width: 768px) { 
+    .site-content{
+        margin-top:170px;
+        padding: 10px;
+    }
+}
+.item-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.item {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    padding: 10px 0;
+    width:450px;
+    height:160px;
+    overflow: hidden;
+  }
+  .item>a{
+    display: block;
+    display: flex;
+  }
+  .item .cover,
+  .item .cover img{
+    width: 80px;
+    padding-top: 10px;
+  }
+  .item .detail {
+    padding-left: 20px;
+  }
+  .item .detail h2{
+    font-size: 16px;
+  }
+  .item .detail .extra{
+    color: #999;
+    margin-top: 4px;
+  }
+  .item .detail .score{
+    color: #FF5722;
+  }
