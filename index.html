@@ -3,63 +3,78 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/jQuery.js"></script>
     <link rel="stylesheet" href="./css/normalize.css">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
     <title>沐雪豆瓣搜索</title>
 </head>
 
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="https://whhjdi.github.io">
-                    <span class="glyphicon glyphicon-tint" aria-hidden="true"></span>
-                    <span>沐雪</span>
-                </a>
-            </div>
-            <form class="navbar-form navbar-right">
-                <div class="form-group">
-                    <input type="text" class="form-control search" placeholder="Search">
+            <div class="col-2 col-md-2">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="https://whhjdi.github.io">
+                        <span class="glyphicon glyphicon-tint" aria-hidden="true"></span>
+                        <span>沐雪</span>
+                    </a>
                 </div>
-                <button type="button" class="btn btn-default movie">电影</button>
-                <button type="button" class="btn btn-default music">音乐</button>
-                <button type="button" class="btn btn-default book">图书</button>
-            </form>
+            </div>
+            <div class="col-10 col-md-10">
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" class="form-control search" placeholder="Search">
+                    </div>
+                    <button type="button" class="btn btn-default movie">电影</button>
+                    <button type="button" class="btn btn-default music">音乐</button>
+                    <button type="button" class="btn btn-default book">图书</button>
+                </form>
+            </div>
         </div>
     </nav>
+    <!-- 欢迎页 -->
+    <div class="jumbotron" id="jumbotron">
+        <h1 class="display-2">欢迎使用沐雪豆瓣搜索</h1>
+        <p class="lead">本页面可以查询豆瓣图书、歌曲、电影。利用豆瓣提供 API 接口， 使用 jsonp 实现跨域，将豆瓣返回的数据进行解析，并渲染至页面。主要利用伯otstrap, jQuery 以及 jsonp 实现，MVC 模式进行设计。</p>
+        <hr class="my-4">
+        <p>您可以搜电影.搜音乐搜图书</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="https://github.com/whhjdi" role="button">关注我</a>
+        </p>
+    </div>
 
-    <section class="site-content">
-        <div class="container">
-            <!-- Start: 数据展示区开始 -->
-            <div id="show-data-area" class="row item-container"></div>
-            <!-- End: 数据展示区结束 -->
-        </div>
+    <section class="site-content" id="site-content">
+
+        <!-- Start: 数据展示区开始 -->
+        <div id="show-data-area" class="row item-container"></div>
+        <!-- End: 数据展示区结束 -->
+        <nav aria-label="bottom" class="page-bottom">
+            <ul class="pager">
+                <li>
+                    <a href="#">Previous</a>
+                </li>
+                <li>
+                    <a href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
     </section>
     <!-- 底部翻页 -->
-    <!-- <section class="site-bottom-nav">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-auto">
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label id="prev-page" class="btn btn-secondary active">
-                            <input type="radio" name="options" autocomplete="off" checked>上一页
-                        </label>
-                        <label id="next-page" class="btn btn-secondary">
-                            <input type="radio" name="options" autocomplete="off">下一页
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-    <script src="./main.js "></script>
+    <!-- <nav aria-label="bottom">
+        <ul class="pager">
+            <li>
+                <a href="#">Previous</a>
+            </li>
+            <li>
+                <a href="#">Next</a>
+            </li>
+        </ul>
+    </nav> -->
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 
 </html>
