@@ -19,9 +19,9 @@ console.log(isToEnd())
 var clock
 $(window).scroll(function () {
     if (clock) {
-        clearTimeout(timeId)
+        clearTimeout(clock)
     }
-    timeId = setTimeout(function () {
+    clock = setTimeout(function () {
         if (isToEnd()) {
             var keyword = $('.search').val()
             getData(keyword)
