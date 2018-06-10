@@ -34,7 +34,7 @@ function getData(keyword) {
     isLoading = true
     
     $.ajax({
-        url: `http://api.douban.com/v2/movie/search?q=${keyword}`,
+        url: `https://api.douban.com/v2/movie/search?q=${keyword}`,
         type: 'GET',
         data: {
             start: index,
