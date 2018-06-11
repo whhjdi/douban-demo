@@ -3,7 +3,7 @@ body{
 }
 .site-content{
     margin-bottom:0;
-    margin-top: 100px;
+    margin-top: 80px;
 }
 @media (max-width: 768px) { 
     .site-content{
@@ -48,11 +48,24 @@ body{
     color: #FF5722;
   }
 #jumbotron{
-  height: 100%;
+  height:100%;
   margin-bottom: 0;
   padding: 150px 50px;
   text-align: center;
 }
-.page-bottom{
+.nav-bottom{
   display: none;
+}
+.loading{
+  text-align: center;
+  display: none;
+}
+.loading>img{
+  width: 30px;
+  display: inline-block;
+  animation: 1s rotate linear infinite;
+}
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg);  }
 }
