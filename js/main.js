@@ -250,7 +250,7 @@ var bindEvents = {
     bind() {
         var _this = this
         this.$document.scroll(function () {
-            if (document.body.clientWidth < 768 && window.pageYOffset > 200) {
+            if (window.innerWidth < 768 && window.pageYOffset > 200) {
                 console.log(1)
                 _this.$navBar.fadeOut()
             } else {
