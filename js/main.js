@@ -218,8 +218,9 @@ var setData = {
 }
 
 /*绑定事件*/
-var bindEvent = {
+var bindEvents = {
     init: function () {
+        this.$navBar = $('.navbar')
         this.$document = $(document)
         this.$movie = $('.movie')
         this.$music = $('.music')
@@ -236,49 +237,46 @@ var bindEvent = {
         this.page = 0
         this.bind()
     },
+    showData: function () {
+        this.$loading.show()
+        this.$itemContainer.empty()
+        this.index = 0
+        this.page = 0
+        this.$document.scrollTop(0)
+        this.$navBottom.hide()
+        getData.init(this.index)
+        this.$welcome.hide()
+    },
+
     bind: function () {
         var _this = this
+        this.$document.scroll(function () {
+            if (document.body.clientWidth < 768 && window.pageYOffset > 200) {
+                console.log(1)
+                _this.$navBar.fadeOut()
+            } else {
+                _this.$navBar.fadeIn()
+            }
+        })
+
         this.$search.keydown(function (e) {
             if (e.keyCode == "13") {
-                _this.$keyword = $('.search').val()
-                if (_this.$keyword) {
-                    window.open("//" + "www.baidu.com/s?wd=" + _this.$keyword)
-                    return false
-                }
+                _this.$itemContainer.attr('title', 'movie')
+                _this.showData()
+                return false
             }
         })
         this.$movie.on('click', function () {
             _this.$itemContainer.attr('title', 'movie')
-            _this.$loading.show()
-            _this.$itemContainer.empty()
-            _this.index = 0
-            _this.page = 0
-            _this.$document.scrollTop(0)
-            _this.$navBottom.hide()
-            getData.init(_this.index)
-            _this.$welcome.hide()
+            _this.showData()
         })
         this.$music.on('click', function () {
             _this.$itemContainer.attr('title', 'music')
-            _this.$loading.show()
-            _this.$itemContainer.empty()
-            _this.index = 0
-            _this.page = 0
-            _this.$document.scrollTop(0)
-            _this.$navBottom.hide()
-            getData.init(_this.index)
-            _this.$welcome.hide()
+            _this.showData()
         })
         this.$book.on('click', function () {
             _this.$itemContainer.attr('title', 'book')
-            _this.$loading.show()
-            _this.$itemContainer.empty()
-            _this.index = 0
-            _this.page = 0
-            _this.$document.scrollTop(0)
-            _this.$navBottom.hide()
-            getData.init(_this.index)
-            _this.$welcome.hide()
+            _this.showData()
         })
         this.$previous.on('click', function () {
             if (_this.index === 0) {
@@ -290,7 +288,7 @@ var bindEvent = {
                 _this.index -= 20
                 _this.$document.scrollTop(0)
                 _this.page--
-                getData.init(_this.index, _this.page)
+                    getData.init(_this.index, _this.page)
 
             }
         })
@@ -301,7 +299,7 @@ var bindEvent = {
             _this.index += 20
             _this.$document.scrollTop(0)
             _this.page++
-            getData.init(_this.index, _this.page)
+                getData.init(_this.index, _this.page)
         })
     }
 }
@@ -309,7 +307,7 @@ var bindEvent = {
 bindEvent.init()更好 */
 var app = {
     init: function () {
-        bindEvent.init()
+        bindEvents.init()
     }
 }
 app.init()
