@@ -1,6 +1,6 @@
 /*获取数据*/
 var getData = {
-    init: function (index, page) {
+    init(index, page) {
         this.isLoading = false
         this.$search = $('.search')
         this.$loading = $('.loading')
@@ -10,7 +10,7 @@ var getData = {
         this.isLoading = true
         this.start(index, page)
     },
-    start: function (index, page) {
+    start(index, page) {
         _this = this
         $.ajax({
             url: `https://api.douban.com/v2/${_this.$itemContainer.attr('title')}/search`,
@@ -42,16 +42,15 @@ var getData = {
         })
     },
 }
-
 /*渲染数据*/
-var setData = {
-    init: function (data) {
+var setData = {  
+    init(data) {
         this.$itemContainer = $('.item-container')
         this.$loading = $('.loading')
         this.$navBottom = $('.nav-bottom')
         this.start(data)
     },
-    start: function (data) {
+    start(data) {
         _this = this
         if (_this.$itemContainer.attr('title') === 'movie') {
             data.subjects.forEach(function (movie) {
@@ -219,7 +218,7 @@ var setData = {
 
 /*绑定事件*/
 var bindEvents = {
-    init: function () {
+    init() {
         this.$navBar = $('.navbar')
         this.$document = $(document)
         this.$movie = $('.movie')
@@ -237,7 +236,7 @@ var bindEvents = {
         this.page = 0
         this.bind()
     },
-    showData: function () {
+    showData() {
         this.$loading.show()
         this.$itemContainer.empty()
         this.index = 0
@@ -248,7 +247,7 @@ var bindEvents = {
         this.$welcome.hide()
     },
 
-    bind: function () {
+    bind() {
         var _this = this
         this.$document.scroll(function () {
             if (document.body.clientWidth < 768 && window.pageYOffset > 200) {
@@ -261,6 +260,8 @@ var bindEvents = {
 
         this.$search.keydown(function (e) {
             if (e.keyCode == "13") {
+                // 这里可以加个下拉框,选择的选项,作为$itemContainer的title
+                // 这样就可以选择回车键搜索的选项
                 _this.$itemContainer.attr('title', 'movie')
                 _this.showData()
                 return false
@@ -303,11 +304,5 @@ var bindEvents = {
         })
     }
 }
-/*入口,不写也行,或许直接 
-bindEvent.init()更好 */
-var app = {
-    init: function () {
-        bindEvents.init()
-    }
-}
-app.init()
+
+bindEvents.init()
