@@ -215,7 +215,6 @@ var setData = {
 
 
 }
-
 /*绑定事件*/
 var bindEvents = {
     init() {
