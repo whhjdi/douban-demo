@@ -14,7 +14,7 @@ var getData = {
     start(index) {
         _this = this
         let api = _this.$itemContainer.attr('title')
-        console.log(api)
+        // console.log(api)
         $.ajax({
             url: `https://api.douban.com/v2/${api}/search`,
             type: 'GET',
@@ -28,7 +28,7 @@ var getData = {
             // console.log(req)
             // console.log(index)
             // console.log((index * page >= req.total))
-            console.log(req)
+            // console.log(req)
             _this.$loading.hide()
             _this.$next.show()
             if (req.total === 0) {
