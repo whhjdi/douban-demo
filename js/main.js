@@ -1,19 +1,22 @@
 /*获取数据*/
 var getData = {
-    init(index, page) {
+    init(index) {
         this.isLoading = false
+        this.$next = $('.next')
         this.$search = $('.search')
         this.$loading = $('.loading')
         this.$welcome = $('.jumbotron')
         this.$itemContainer = $('.item-container')
         if (this.isLoading) return
         this.isLoading = true
-        this.start(index, page)
+        this.start(index)
     },
-    start(index, page) {
+    start(index) {
         _this = this
+        let api = _this.$itemContainer.attr('title')
+        console.log(api)
         $.ajax({
-            url: `https://api.douban.com/v2/${_this.$itemContainer.attr('title')}/search`,
+            url: `https://api.douban.com/v2/${api}/search`,
             type: 'GET',
             data: {
                 q: _this.$search.val(),
@@ -24,15 +27,33 @@ var getData = {
         }).done(function (req) {
             // console.log(req)
             // console.log(index)
-            // console.log(page)
             // console.log((index * page >= req.total))
-            if (index * page >= req.total || req.total === 0) {
-                alert('没有到更多搜索结果了,即将返回首页')
-                _this.$loading.hide()
+            console.log(req)
+            _this.$loading.hide()
+            _this.$next.show()
+            if (req.total === 0) {
+                alert('没有搜索到相关信息,点击返回首页')
                 _this.$welcome.show()
-            } else {
+            }else{
+                if (`${api}` === 'movie') {
+                    if (req.subjects.length < 20 && req.subjects.length !== 0) {
+                        alert('已经是最后一页了')
+                        _this.$next.hide()
+                    }
+                } else if (`${api}` === 'music') {
+                    if (req.musics.length < 20 && req.musics.length !== 0) {
+                        alert('已经是最后一页了')
+                        _this.$next.hide()
+                    }
+                } else if (`${api}` === 'book') {
+                    if (req.books.length < 20 && req.books.length !== 0) {
+                        alert('已经是最后一页了')
+                        _this.$next.hide()
+                    }
+                } else{
+                    _this.$next.attr("disabled",false);
+                }
                 setData.init(req)
-                _this.$loading.hide()
                 _this.$navBottom.show()
             }
         }).fail(function () {
@@ -43,7 +64,7 @@ var getData = {
     },
 }
 /*渲染数据*/
-var setData = {  
+var setData = {
     init(data) {
         this.$itemContainer = $('.item-container')
         this.$loading = $('.loading')
@@ -67,6 +88,8 @@ var setData = {
                 var $node = _this.createBook(book, data)
                 _this.$itemContainer.append($node)
             })
+
+
         }
     },
     createMovie: function (movie, data) {
@@ -232,14 +255,12 @@ var bindEvents = {
         this.index = 0
         this.$loading = $('.loading')
         this.$search = $('.search')
-        this.page = 0
         this.bind()
     },
     showData() {
         this.$loading.show()
         this.$itemContainer.empty()
         this.index = 0
-        this.page = 0
         this.$document.scrollTop(0)
         this.$navBottom.hide()
         getData.init(this.index)
@@ -250,7 +271,6 @@ var bindEvents = {
         var _this = this
         this.$document.scroll(function () {
             if (window.innerWidth < 768 && window.pageYOffset > 200) {
-                console.log(1)
                 _this.$navBar.fadeOut()
             } else {
                 _this.$navBar.fadeIn()
@@ -287,8 +307,7 @@ var bindEvents = {
                 _this.$navBottom.hide()
                 _this.index -= 20
                 _this.$document.scrollTop(0)
-                _this.page--
-                    getData.init(_this.index, _this.page)
+                getData.init(_this.index)
 
             }
         })
@@ -298,8 +317,7 @@ var bindEvents = {
             _this.$navBottom.hide()
             _this.index += 20
             _this.$document.scrollTop(0)
-            _this.page++
-                getData.init(_this.index, _this.page)
+            getData.init(_this.index)
         })
     }
 }
